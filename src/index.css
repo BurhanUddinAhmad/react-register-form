@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background: #6681bb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
