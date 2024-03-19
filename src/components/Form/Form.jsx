@@ -5,18 +5,23 @@ const Form = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     // console.log({Name: name, Email: email, Password: password});
     const handleSubmit = e => {
         e.preventDefault();
-        const users = {
-            Name: name,
-            Email: email,
-            Password: password
+        if (!isChecked) {
+            return;
         }
-        // e.target.value = "";
+        // const users = {
+        //     Name: name,
+        //     Email: email,
+        //     Password: password
+        // }
+        // console.log(users);
 
-        console.log(users);
+        setIsSubmit(true);
     }
 
     return (
@@ -49,13 +54,29 @@ const Form = () => {
                 type="password" 
                 required
                 name="" />
+                <input 
+                onChange={e => setIsChecked(e.target.checked)}
+                type="checkbox" /> Do you agree with terms & condisions? 
 
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-3">
                     <button 
                     className="bg-blue-400 p-2 text-white rounded-lg duration-300 hover:bg-blue-300"
                     >Sign Up</button>
                 </div>
             </form>
+
+            {/*============ Modal ========= */}
+            {
+                isSubmit && (<div className="fixed top-0 left-0 flex justify-center items-center bg-blue-500 h-screen w-full">
+                <div className="bg-white rounded-lg w-96 p-5">
+                    <h2 className="text-center font-bold text-2xl text-blue-500 mb-4">Successfully Registered!</h2>
+                    <p className="text-xl">Name: {name} </p>
+                    <p className="text-xl">Email: {email} </p>
+                    <p className="text-xl">Password: {password} </p>
+                </div>
+            </div>)
+            }
+
         </>
     );
 };
